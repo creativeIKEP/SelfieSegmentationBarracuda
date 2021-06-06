@@ -1,8 +1,7 @@
 #pragma kernel Preprocess
-#pragma kernel Postprocess
 
-float width = 256;
-float height = 256; 
+#define IMAGE_SIZE 256
+
 sampler2D _inputTexture;
 RWStructuredBuffer<float> _output;
 
@@ -11,32 +10,18 @@ RWStructuredBuffer<float> _output;
 void Preprocess(uint3 id : SV_DispatchThreadID)
 {
     // Caluculate vertically flipped UV.
-    float2 uv = float2((0.5 + id.x) / width, (height - 0.5 - id.y) / height);
+    float2 uv = float2(0.5 + id.x, IMAGE_SIZE - 0.5 - id.y) / IMAGE_SIZE;
 
     // Caluculate vertically flipped UV gradients.
-    float2 duv_dx = float2(1.0 / width, 0);
-    float2 duv_dy = float2(0, -1.0 / height);
+    float2 duv_dx = float2(1.0 / IMAGE_SIZE, 0);
+    float2 duv_dy = float2(0, -1.0 / IMAGE_SIZE);
 
     // Texture sample
     float3 rgb = tex2Dgrad(_inputTexture, uv, duv_dx, duv_dy).rgb;
 
     // Generate output buffer
-    uint offs = (id.y * width + id.x) * 3;
+    uint offs = (id.y * IMAGE_SIZE + id.x) * 3;
     _output[offs + 0] = rgb.r;
     _output[offs + 1] = rgb.g;
     _output[offs + 2] = rgb.b;
-}
-
-
-StructuredBuffer<float> _input;
-RWTexture2D<float4> _outputTexture;
-// RWStructuredBuffer<float> _outputTexture;
-
-[numthreads(8, 8, 1)]
-void Postprocess(uint3 id : SV_DispatchThreadID)
-{
-    uint ch = 0;
-    uint index = (id.y * width + id.x);
-    float p = _input[index];
-    _outputTexture[id.xy] = float4(p, p, p, 1);
 }

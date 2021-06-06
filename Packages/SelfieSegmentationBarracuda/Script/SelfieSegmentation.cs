@@ -21,8 +21,6 @@ namespace Mediapipe.SelfieSegmentation{
             networkInputBuffer = new ComputeBuffer(width * height * in_ch, sizeof(float));
 
             outputTexture = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32);
-            // outputTexture.enableRandomWrite = true;
-            // outputTexture.Create();
             
             model = ModelLoader.Load(resource.model);
             woker = model.CreateWorker();
@@ -35,12 +33,16 @@ namespace Mediapipe.SelfieSegmentation{
             preProcessCS.Dispatch(0, width / 8, height / 8, 1);
 
             //Execute neural network model.
-            // var inputTensor = new Tensor(1, height, width, in_ch, networkInputBuffer);
-            var inputTensor = new Tensor(inputTexture, in_ch);
+            var inputTensor = new Tensor(1, height, width, in_ch, networkInputBuffer);
             woker.Execute(inputTensor);
             inputTensor.Dispose();
 
             var segTemp = CopyOutputToTempRT("activation_10", width, height);
+
+            if(outputTexture.width != inputTexture.width || outputTexture.height != inputTexture.height){
+                outputTexture?.Release();
+                outputTexture = new RenderTexture(inputTexture.width, inputTexture.height, 0, RenderTextureFormat.ARGB32);
+            }
             Graphics.Blit(segTemp, outputTexture);
             RenderTexture.ReleaseTemporary(segTemp);
         }
