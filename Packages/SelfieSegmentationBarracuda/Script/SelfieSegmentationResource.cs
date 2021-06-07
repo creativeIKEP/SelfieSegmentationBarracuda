@@ -7,5 +7,6 @@ namespace Mediapipe.SelfieSegmentation{
     {
         public NNModel model;
         public ComputeShader preProcessCS;
+        public ComputeShader postProcessCS;
     }
 }

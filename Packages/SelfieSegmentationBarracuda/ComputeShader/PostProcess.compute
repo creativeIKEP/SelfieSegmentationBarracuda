@@ -1,0 +1,62 @@
+#pragma kernel PostProcess
+
+#include "UnityCG.cginc"
+#define IMAGE_SIZE 256
+
+const float PI = 3.1415926525;
+
+sampler2D _inputTexture;
+RWTexture2D<float4> _output;
+
+float Gaussian1D(float x, uint sigma)
+{
+    float doubleSigma2 = 2 * sigma * sigma;
+    float e_x = - (x * x / doubleSigma2);
+    return exp(e_x);
+}
+
+float Gaussian2D(float x, float y, uint sigma)
+{
+    float doubleSigma2 = 2 * sigma * sigma;
+    float z = x * x + y * y;
+    float e_x = - (z / doubleSigma2);
+    return exp(e_x);
+}
+
+
+float BilateralFilter(sampler2D preImage, int2 id, uint kernelSize, uint sigma1, uint sigma2)
+{
+    int half_kernelSize = (uint)(kernelSize * 0.5);
+    float2 uv = float2(0.5 + id.x, 0.5 + id.y) / IMAGE_SIZE;
+    float2 duv_dx = float2(1.0 / IMAGE_SIZE, 0);
+    float2 duv_dy = float2(0, 1.0 / IMAGE_SIZE);
+
+    float sum1 = 0;
+    float sum2 = 0;
+    [unroll]
+    for(int n = -half_kernelSize; n <= half_kernelSize; n++){
+        for(int m = -half_kernelSize; m <= half_kernelSize; m++){
+            int2 slide = int2(n, m);
+            float targetPix = tex2Dgrad(preImage, uv, duv_dx, duv_dy).r * 255.0;
+            float slidePix = tex2Dgrad(preImage, uv + slide, duv_dx, duv_dy).r * 255.0;
+    
+            float g1 = Gaussian1D(targetPix - slidePix, sigma2);
+            float g2 = Gaussian2D(n, m, sigma1);
+
+            float w = g1 * g2;
+            sum1 += w * slidePix;
+            sum2 += w;
+        }
+    }
+    float result = sum1 / sum2;
+    return result;
+}
+
+[numthreads(8, 8, 1)]
+void PostProcess(uint3 id : SV_DispatchThreadID)
+{
+    float p = BilateralFilter(_inputTexture, id.xy, 5, 1, 1) / 255.0;
+
+    _output[id.xy] = float4(p, p, p, 1);
+}
+
