@@ -24,7 +24,7 @@ or, adding below sentence to your manifest file(`Packages/manifest.json`) `depen
 
 ### Usage Demo
 Below code is the demo that segment the prominent humans in the scene.
-Check ["/Assets/Sample/SegmentationSample/Script/SegmentationVisuallizer.cs"](/Assets/Sample/SegmentationSample/Script/SegmentationVisuallizer.cs) and ["/Assets/Sample/SegmentationSample/Scenes/SegmentationSample.unity"](/Assets/Sample/SegmentationSample/Scenes/SegmentationSample.unity) for SelfieSegmentationBarracuda usage demo details.
+Check ["/Assets/Sample/SegmentationSample/Script/SegmentationVisuallizer.cs"](https://github.com/creativeIKEP/SelfieSegmentationBarracuda/blob/main/Assets/Sample/SegmentationSample/Script/SegmentationVisuallizer.cs) and ["/Assets/Sample/SegmentationSample/Scenes/SegmentationSample.unity"](https://github.com/creativeIKEP/SelfieSegmentationBarracuda/blob/main/Assets/Sample/SegmentationSample/Scenes/SegmentationSample.unity) for SelfieSegmentationBarracuda usage demo details.
 
 ```cs
 using UnityEngine;

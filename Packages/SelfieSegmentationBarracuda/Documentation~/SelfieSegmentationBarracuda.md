@@ -1,11 +1,4 @@
-# SelfieSegmentationBarracuda
-![demo_segmentation](/screenshot/demo_segmentation.gif)
-![demo_virtual_background](/screenshot/demo_virtual_background.gif)
-
-**SelfieSegmentationBarracuda** is a human segmentation neural network that works with a monocular color camera.
-
-SelfieSegmentationBarracuda is a Unity Package that runs the [Mediapipe Selfie Segmentation](https://google.github.io/mediapipe/solutions/selfie_segmentation) on the [Unity Barracuda](https://docs.unity3d.com/Packages/com.unity.barracuda@latest).
-
+# SelfieSegmentationBarracuda Usage Documentation
 ### Install
 SelfieSegmentationBarracuda can be installed by adding below URL on the Unity Package Manager's window
 ```
@@ -24,7 +17,7 @@ or, adding below sentence to your manifest file(`Packages/manifest.json`) `depen
 
 ### Usage Demo
 Below code is the demo that segment the prominent humans in the scene.
-Check ["/Assets/Sample/SegmentationSample/Script/SegmentationVisuallizer.cs"](/Assets/Sample/SegmentationSample/Script/SegmentationVisuallizer.cs) and ["/Assets/Sample/SegmentationSample/Scenes/SegmentationSample.unity"](/Assets/Sample/SegmentationSample/Scenes/SegmentationSample.unity) for SelfieSegmentationBarracuda usage demo details.
+Check ["/Assets/Sample/SegmentationSample/Script/SegmentationVisuallizer.cs"](https://github.com/creativeIKEP/SelfieSegmentationBarracuda/blob/main/Assets/Sample/SegmentationSample/Script/SegmentationVisuallizer.cs) and ["/Assets/Sample/SegmentationSample/Scenes/SegmentationSample.unity"](https://github.com/creativeIKEP/SelfieSegmentationBarracuda/blob/main/Assets/Sample/SegmentationSample/Scenes/SegmentationSample.unity) for SelfieSegmentationBarracuda usage demo details.
 
 ```cs
 using UnityEngine;
@@ -57,18 +50,3 @@ public class <YourClassName>: MonoBehaviour
   }
 }
 ```
-
-### Demo Image
-- The video for demo scene was downloaded from [here](https://www.pexels.com/ja-jp/photo/7261928/).
-- The image for virtual background demo scene was downloaded from [here](https://pixabay.com/images/id-5637906/).
-
-### ONNX Model
-The ONNX model files have been downloaded from [PINTO_model_zoo](https://github.com/PINTO0309/PINTO_model_zoo) > [109_Selfie_Segmentation](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/109_Selfie_Segmentation).
-
-### Author
-[IKEP](https://ikep.jp)
-
-### LICENSE
-Copyright (c) 2021 IKEP
-
-[Apache-2.0](/LICENSE.md)
