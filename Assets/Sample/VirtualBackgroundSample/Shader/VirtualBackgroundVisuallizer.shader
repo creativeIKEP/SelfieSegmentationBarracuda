@@ -1,9 +1,9 @@
-Shader "Hidden/SelfieSegmentation/HumanSegmentationVisuallizer"
+Shader "Hidden/SelfieSegmentation/VirtualBackgroundVisuallizer"
 {
     Properties
     {
+        // Segmentation texture
         _MainTex ("Texture", 2D) = "white" {}
-        _inputImage ("Texture", 2D) = "white" {}
     }
     SubShader
     {
@@ -23,14 +23,15 @@ Shader "Hidden/SelfieSegmentation/HumanSegmentationVisuallizer"
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float2 uv : TEXCOORD0;
             };
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
             sampler2D _inputImage;
-            float4 _inputImage_ST;
+            sampler2D _backImage;
+            float _threshold;
 
             v2f vert (appdata v)
             {
@@ -42,11 +43,11 @@ Shader "Hidden/SelfieSegmentation/HumanSegmentationVisuallizer"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // sample the texture
                 fixed4 col = tex2D(_inputImage, i.uv);
                 fixed4 mask = tex2D(_MainTex, i.uv);
-                mask = (mask.r > 0.95) ? mask : fixed4(0, 0, 0, 1);
-                return col * mask;
+                fixed4 back = tex2D(_backImage, i.uv);
+                fixed4 p = (mask.r >= _threshold) ? col : back;
+                return p;
             }
             ENDCG
         }

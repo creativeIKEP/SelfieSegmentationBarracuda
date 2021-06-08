@@ -2,31 +2,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using Mediapipe.SelfieSegmentation;
 
-public class Visuallizer : MonoBehaviour
+public class SegmentationVisuallizer : MonoBehaviour
 {
     [SerializeField] WebCamInput webCamInput;
     [SerializeField] RawImage inputImageUI;
     [SerializeField] RawImage segmentationImage;
-    [SerializeField] Shader shader;
     [SerializeField] SelfieSegmentationResource resource;
 
     SelfieSegmentation segmentation;
-    Material material;
 
     void Start(){
         segmentation = new SelfieSegmentation(resource);
-
-        material = new Material(shader);
-        segmentationImage.material = material;
     }
 
     void LateUpdate(){
         inputImageUI.texture = webCamInput.inputImageTexture;
-
+        // Predict segmentation by neural network model.
         segmentation.ProcessImage(webCamInput.inputImageTexture);
-
+        // Visualize segmentation texture as UI image.
         segmentationImage.texture = segmentation.texture;
-        material.SetTexture("_inputImage", webCamInput.inputImageTexture);
     } 
 
     void OnApplicationQuit(){
