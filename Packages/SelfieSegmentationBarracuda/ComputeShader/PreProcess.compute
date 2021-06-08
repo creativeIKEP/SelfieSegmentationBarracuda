@@ -1,5 +1,6 @@
 #pragma kernel Preprocess
 
+// Input image size defined by neural network model.
 #define IMAGE_SIZE 256
 
 sampler2D _inputTexture;

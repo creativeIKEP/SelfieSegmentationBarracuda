@@ -25,7 +25,7 @@ public class Visuallizer : MonoBehaviour
 
         segmentation.ProcessImage(webCamInput.inputImageTexture);
 
-        segmentationImage.texture = segmentation.outputTexture;
+        segmentationImage.texture = segmentation.texture;
         material.SetTexture("_inputImage", webCamInput.inputImageTexture);
     } 
 
