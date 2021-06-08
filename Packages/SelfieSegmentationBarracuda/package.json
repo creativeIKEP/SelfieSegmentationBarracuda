@@ -12,8 +12,9 @@
   "keywords": [
     "unity",
     "Barracuda",
-    "DeepLab",
-    "Segmentation"
+    "Mediapipe",
+    "SelfieSegmentation",
+    "HumanSegmentation"
   ],
   "dependencies": {
     "com.unity.barracuda": "2.0.0-pre.3"
