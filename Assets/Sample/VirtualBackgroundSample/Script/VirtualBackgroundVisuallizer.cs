@@ -10,7 +10,6 @@ public class VirtualBackgroundVisuallizer : MonoBehaviour
     [SerializeField] SelfieSegmentationResource resource;
     [SerializeField] Shader shader;
     [SerializeField] Texture backGroundTexture;
-    [SerializeField, Range(0, 1)] float threshold = 0.95f;
 
     SelfieSegmentation segmentation;
     Material material;
@@ -33,7 +32,6 @@ public class VirtualBackgroundVisuallizer : MonoBehaviour
         
         material.SetTexture("_inputImage", webCamInput.inputImageTexture);
         material.SetTexture("_backImage", backGroundTexture);
-        material.SetFloat("_threshold", threshold);
     } 
 
     void OnApplicationQuit(){
