@@ -1,6 +1,6 @@
 # SelfieSegmentationBarracuda
-![demo_segmentation](/screenshot/demo_segmentation.gif)
-![demo_virtual_background](/screenshot/demo_virtual_background.gif)
+![demo_segmentation](https://user-images.githubusercontent.com/34697515/135959250-ae16c070-54ea-42d6-af2c-b6fd7d773f41.gif)
+![demo_virtual_background](https://user-images.githubusercontent.com/34697515/135959287-74ed1d38-6b24-4c3e-9424-d196ce5b76ef.gif)
 
 **SelfieSegmentationBarracuda** is a human segmentation neural network that works with a monocular color camera.
 
