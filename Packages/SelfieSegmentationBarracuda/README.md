@@ -7,15 +7,50 @@
 SelfieSegmentationBarracuda is a Unity Package that runs the [Mediapipe Selfie Segmentation](https://google.github.io/mediapipe/solutions/selfie_segmentation) on the [Unity Barracuda](https://docs.unity3d.com/Packages/com.unity.barracuda@latest).
 
 ### Install
+SelfieSegmentationBarracuda can be installed from npm or GitHub URL.
+
+### Install from npm (Recommend)
+SelfieSegmentationBarracuda can be installed by adding following sections to the manifest file (`Packages/manifest.json`).
+
+To the `scopedRegistries` section:
+```
+{
+  "name": "creativeikep",
+  "url": "https://registry.npmjs.com",
+  "scopes": [ "jp.ikep" ]
+}
+```
+To the `dependencies` section:
+```
+"jp.ikep.mediapipe.selfiesegmentation": "1.0.1"
+```
+Finally, the manifest file looks like below:
+```
+{
+    "scopedRegistries": [
+        {
+            "name": "creativeikep",
+            "url": "https://registry.npmjs.com",
+            "scopes": [ "jp.ikep" ]
+        }
+    ],
+    "dependencies": {
+        "jp.ikep.mediapipe.selfiesegmentation": "1.0.1",
+        ...
+    }
+}
+```
+
+### Install from GitHub URL
 SelfieSegmentationBarracuda can be installed by adding below URL on the Unity Package Manager's window
 ```
-https://github.com/creativeIKEP/SelfieSegmentationBarracuda.git?path=Packages/SelfieSegmentationBarracuda#v1.0.0
+https://github.com/creativeIKEP/SelfieSegmentationBarracuda.git?path=Packages/SelfieSegmentationBarracuda#v1.0.1
 ```
 or, adding below sentence to your manifest file(`Packages/manifest.json`) `dependencies` block. Example is below.
 ```
 {
   "dependencies": {
-    "jp.ikep.mediapipe.selfiesegmentation": "https://github.com/creativeIKEP/SelfieSegmentationBarracuda.git?path=Packages/SelfieSegmentationBarracuda#v1.0.0",
+    "jp.ikep.mediapipe.selfiesegmentation": "https://github.com/creativeIKEP/SelfieSegmentationBarracuda.git?path=Packages/SelfieSegmentationBarracuda#v1.0.1",
     ...
   }
 }

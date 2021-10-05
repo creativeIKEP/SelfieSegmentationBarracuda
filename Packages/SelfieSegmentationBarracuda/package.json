@@ -6,7 +6,7 @@
   "name": "jp.ikep.mediapipe.selfiesegmentation",
   "displayName": "SelfieSegmentationBarracuda",
   "description": "MediaPipe Selfie Segmentation for Unity Barracuda.\nSelfieSegmentationBarracuda segments the prominent humans in the scene.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "unity": "2020.3",
   "unityRelease": "6f1",
   "keywords": [
@@ -18,5 +18,7 @@
   ],
   "dependencies": {
     "com.unity.barracuda": "2.0.0-pre.3"
-  }
+  },
+  "license": "Apache-2.0",
+  "repository": "github:creativeIKEP/SelfieSegmentationBarracuda"
 }
